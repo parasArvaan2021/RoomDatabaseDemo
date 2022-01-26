@@ -1,6 +1,5 @@
 package com.example.roomdatabasedemo.design
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -64,7 +63,8 @@ class MainActivity : AppCompatActivity(), DatabaseItemInterface {
                 Repository(
                     userEmail = "paras email $i",
                     userName = "paras name $i",
-                    userId = null
+                    userId = null,
+                    number = null
                 )
             )
 
@@ -108,7 +108,8 @@ class MainActivity : AppCompatActivity(), DatabaseItemInterface {
         val user = Repository(
             userName = userName.text.toString(),
             userEmail = userEmail.text.toString(),
-            userId = null
+            userId = null,
+            number = null
         )
 
         doAsync {
@@ -146,9 +147,10 @@ class MainActivity : AppCompatActivity(), DatabaseItemInterface {
         if (user.userId != null && user.userId.toString().isNotEmpty()) {
             doAsync {
                 db.userDao().deleteUser(user.userId.toString().toInt())
-
+                btnShowData.performClick()
+                rvDatabaseDataList.adapter?.notifyDataSetChanged()
                 uiThread {
-                    btnShowData.performClick()
+
                 }
             }
 
@@ -160,7 +162,7 @@ class MainActivity : AppCompatActivity(), DatabaseItemInterface {
         if (userName.getTag() != null && !userName.getTag().toString().isEmpty()) {
             val user = Repository(
                 userName = userName.text.toString(), userEmail = userEmail.text.toString(),
-                userId = userName.getTag().toString().toInt()
+                userId = userName.getTag().toString().toInt(),number = null
             )
 
             doAsync {

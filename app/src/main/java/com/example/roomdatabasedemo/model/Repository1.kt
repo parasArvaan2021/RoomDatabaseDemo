@@ -6,8 +6,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Keep
-@Entity(tableName = "user")
-data class Repository(
+@Entity(tableName = "USERDATA")
+data class Repository1(
 
     @PrimaryKey @ColumnInfo(name = "userId") val userId: Int?,
     @ColumnInfo(name = "userName") val userName: String,
